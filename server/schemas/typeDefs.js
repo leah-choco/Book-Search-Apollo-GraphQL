@@ -6,12 +6,12 @@ const typeDefs = gql`
     username: String!
     email: String
     bookCount: Int
-    savedBooks: ??(This will be an array of the Book type.)
+    savedBooks: [Book]??(This will be an array of the Book type.)
   }
 
   type Book {
     bookId: ID!
-    authors: ??(An array of strings, as there may be more than one author)
+    authors: [Authors]??(An array of strings, as there may be more than one author)
     description: String!
     title: String
     image: ????
