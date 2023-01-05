@@ -1,27 +1,28 @@
-const { Tech, Matchup } = require("../models");
-
+const { User, Book } = require("../models");
+//Line 22 need help!
+//Adding User and Book
 const resolvers = {
   Query: {
-    tech: async () => {
-      return Tech.find({});
+    user: async () => {
+      return User.find({});
     },
-    matchups: async (parent, { _id }) => {
+    books: async (parent, { _id }) => {
       const params = _id ? { _id } : {};
-      return Matchup.find(params);
+      return Book.find(params);
     },
   },
   Mutation: {
-    createMatchup: async (parent, args) => {
-      const matchup = await Matchup.create(args);
-      return matchup;
+    createUser: async (parent, args) => {
+      const user = await User.create(args);
+      return user;
     },
-    createVote: async (parent, { _id, techNum }) => {
-      const vote = await Matchup.findOneAndUpdate(
+    saveBook: async (parent, { _id, user }) => {
+      const book = await Book.findOneAndUpdate(
         { _id },
-        { $inc: { [`tech${techNum}_votes`]: 1 } },
+        { $inc: { [`book${techNum}_votes`]: 1 } },
         { new: true }
       );
-      return vote;
+      return book;
     },
   },
 };
