@@ -6,30 +6,41 @@ const typeDefs = gql`
     username: String!
     email: String
     bookCount: Int
-    savedBooks: [Book]??(This will be an array of the Book type.)
+    savedBooks: [Book]
   }
 
   type Book {
     bookId: ID!
-    authors: [Authors]??(An array of strings, as there may be more than one author)
+    authors: [String]
     description: String!
     title: String
-    image: ????
-    link: String????
+    image: String
+    link: String
+  }
+
+  type Auth {
+    token: ID!
+    user: User
   }
 
   type Query {
-    me: [User]
-    user(userId: ID!): User
+    me: User
+    user(_id: ID!): User
   }
 
   type Mutation {
-   login:??? Accepts an email and password as parameters; returns an Auth type
-   addUser(Accepts a username, email, and password as parameters; returns an Auth type)
-   saveBook(book authors array, description, title, bookId,image, and link as parameters, look into input type)
-   removeBook(bookId) : User
+    login(email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
+    saveBook(
+      authors: [String]
+      description: String
+      title: String
+      bookId: ID!
+      image: String
+      link: String
+    ): User
+    removeBook(bookId: ID!): User
   }
 `;
-//Auth type: token, user( References the User type.)
 
 module.exports = typeDefs;
