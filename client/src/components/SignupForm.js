@@ -1,7 +1,7 @@
 /*TO DO: replace the addUser() functionality imported from thr API file with
 the ADD_USER mutation functionality */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 
 import { useMutation } from "@apollo/client";
@@ -11,19 +11,31 @@ import Auth from "../utils/auth";
 
 const SignupForm = () => {
   // set initial form state
-  const [formState, setFormState] = useState({
+  const [userFormData, setUserFormData] = useState({
     username: "",
     email: "",
     password: "",
   });
 
+  const [validated] = useState(false);
+
+  const [showAlert, setShowAlert] = useState(false);
+
   const [addUser, { error, data }] = useMutation(ADD_USER);
+
+  useEffect(() => {
+    if (error) {
+      setShowAlert(true);
+    } else {
+      setShowAlert(false);
+    }
+  }, [error]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
-    setFormState({
-      ...formState,
+    setUserFormData({
+      ...userFormData,
       [name]: value,
     });
   };
@@ -40,13 +52,19 @@ const SignupForm = () => {
 
     try {
       const { data } = await addUser({
-        variables: { ...formState },
+        variables: { ...userFormData },
       });
 
       Auth.login(data.addUser.token);
-    } catch (e) {
+    } catch (err) {
       console.error(err);
     }
+
+    setUserFormData({
+      username: "",
+      email: "",
+      password: "",
+    });
   };
   return (
     <>
@@ -69,7 +87,7 @@ const SignupForm = () => {
             placeholder="Your username"
             name="username"
             onChange={handleInputChange}
-            value={formState.username}
+            value={userFormData.username}
             required
           />
           <Form.Control.Feedback type="invalid">
@@ -84,7 +102,7 @@ const SignupForm = () => {
             placeholder="Your email address"
             name="email"
             onChange={handleInputChange}
-            value={formState.email}
+            value={userFormData.email}
             required
           />
           <Form.Control.Feedback type="invalid">
@@ -99,7 +117,7 @@ const SignupForm = () => {
             placeholder="Your password"
             name="password"
             onChange={handleInputChange}
-            value={formState.password}
+            value={userFormData.password}
             required
           />
           <Form.Control.Feedback type="invalid">
@@ -109,9 +127,9 @@ const SignupForm = () => {
         <Button
           disabled={
             !(
-              setFormState.username &&
-              setFormState.email &&
-              setFormState.password
+              userFormData.username &&
+              userFormData.email &&
+              userFormData.password
             )
           }
           type="submit"
