@@ -5,7 +5,7 @@ Use the useMutation() hook to execute the REMOVE_BOOK mutation in the handleDele
 instead of the deleteBook() that's imported from the API file. Keep the removeBookId in place.
 */
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Jumbotron,
   Container,

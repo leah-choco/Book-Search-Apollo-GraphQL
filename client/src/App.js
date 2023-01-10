@@ -46,8 +46,8 @@ function App() {
         <>
           <Navbar />
           <Switch>
-            <Route exact path="/" element={SearchBooks} />
-            <Route exact path="/savedBooks" element={SavedBooks} />
+            <Route exact path="/search" element={SearchBooks} />
+            <Route exact path="/saved" element={SavedBooks} />
           </Switch>
         </>
       </Router>
