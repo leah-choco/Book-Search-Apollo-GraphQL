@@ -26,7 +26,7 @@ const SearchBooks = () => {
   const [searchInput, setSearchInput] = useState("");
 
   // create state to hold saved bookId values
-  const [saveBookIds, setSavedBookIds] = useState(getSavedBookIds());
+  const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
 
   //Defining the saveBook mutation
   const [saveBook, { error }] = useMutation(SAVE_BOOK);
@@ -34,7 +34,7 @@ const SearchBooks = () => {
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
-    return () => saveBookIds(savedBookIds);
+    return () => savedBookIds(savedBookIds);
   });
 
   // create method to search for books and set state on form submit
