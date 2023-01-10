@@ -43,16 +43,16 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="">
+        <>
           <Navbar />
-          <Routes>
+          <Switch>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/signup" element={<SignupForm />} />
             <Route path="/searchBooks" elements={<SearchBooks />} />
             <Route path="/savedBooks" element={<SavedBooks />} />
-          </Routes>
-        </div>
+          </Switch>
+        </>
       </Router>
     </ApolloProvider>
   );

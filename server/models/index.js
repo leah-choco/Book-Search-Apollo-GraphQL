@@ -1,6 +1,5 @@
 //Added Book and exported
 
 const User = require("./User");
-const Book = require("./Book");
 
-module.exports = { User, Book };
+module.exports = { User };
