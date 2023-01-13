@@ -1,6 +1,6 @@
-/* TO DO: replace the loginUser() functionality imported from the API file
+/* I replaced the loginUser() functionality imported from the API file
 with the LOGIN_USER mutation functionality. */
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 
 import { useMutation } from "@apollo/client";
@@ -13,15 +13,7 @@ const LoginForm = () => {
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
-  const [login, { error }] = useMutation(LOGIN_USER);
-
-  useEffect(() => {
-    if (error) {
-      setShowAlert(true);
-    } else {
-      setShowAlert(false);
-    }
-  }, [error]);
+  const [login] = useMutation(LOGIN_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
