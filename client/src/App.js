@@ -10,9 +10,6 @@ import {
 //Importing setContext
 import { setContext } from "@apollo/client/link/context";
 
-//Importing the Login and Signup Forms
-import LoginForm from "./components/LoginForm";
-import SignupForm from "./components/SignupForm";
 import SearchBooks from "./pages/SearchBooks";
 import SavedBooks from "./pages/SavedBooks";
 import Navbar from "./components/Navbar";
@@ -48,6 +45,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={SearchBooks} />
             <Route exact path="/saved" component={SavedBooks} />
+            <Route render={() => <h1 className="display-2">Wrong Page</h1>} />
           </Switch>
         </>
       </Router>

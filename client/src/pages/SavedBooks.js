@@ -1,8 +1,8 @@
-/*NEED TO DO: remove the useEffect() hook that sets the state for UserData 
-Instead, use the useQuery() hook to execute the GET_ME query on load
+/*I removed the useEffect() hook that sets the state for userData 
+Instead, I used the useQuery() hook to execute the GET_ME query on load
 and save it to a variable named userData.
-Use the useMutation() hook to execute the REMOVE_BOOK mutation in the handleDeleteBook()
-instead of the deleteBook() that's imported from the API file. Keep the removeBookId in place.
+Then I used the useMutation() hook to execute the REMOVE_BOOK mutation in the handleDeleteBook()
+instead of the deleteBook() that's imported from the API file. Kept the removeBookId in place.
 */
 
 import React from "react";
@@ -20,16 +20,16 @@ import { REMOVE_BOOK } from "../utils/mutations";
 
 import { GET_ME } from "../utils/queries";
 
-//import { getMe, deleteBook } from "../utils/API";
 import Auth from "../utils/auth";
+
 import { removeBookId } from "../utils/localStorage";
 
 const SavedBooks = () => {
   const { loading, data } = useQuery(GET_ME);
 
-  const [removeBook, { error }] = useMutation(REMOVE_BOOK);
+  const userData = data?.me || [];
 
-  const userData = data?.me || {};
+  const [removeBook] = useMutation(REMOVE_BOOK);
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
@@ -40,7 +40,7 @@ const SavedBooks = () => {
     }
 
     try {
-      const { data } = await removeBook({
+      const response = await removeBook({
         variables: { bookId },
       });
 

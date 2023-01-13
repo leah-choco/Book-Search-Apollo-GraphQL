@@ -6,7 +6,7 @@ export const getSavedBookIds = () => {
   return savedBookIds;
 };
 
-export const savedBookIds = (bookIdArr) => {
+export const saveBookIds = (bookIdArr) => {
   if (bookIdArr.length) {
     localStorage.setItem("saved_books", JSON.stringify(bookIdArr));
   } else {
