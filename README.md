@@ -2,7 +2,9 @@
 
 \*This app is not deployed as it was an exercise in refactoring an app to use Apollo Server/Provider and GraphQL.
 
-## Screenshot:
+## Screenshot Example:
+
+![screenshot](./client/assets/Book%20Search%20ScreenShot.png)
 
 ## Table of Contents:
 
